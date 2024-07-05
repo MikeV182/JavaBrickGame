@@ -1,18 +1,15 @@
 import java.awt.*;
 import javax.swing.*;
 
-public class Player extends JPanel {
+public class Player extends JLabel {
     private static final int PADDLE_WIDTH = 180;
     private static final int PADDLE_HEIGHT = 10;
+    private static final int PADDLE_X = 550;
+    private static final int PADDLE_Y = 960;
 
-    public Player(int width, int height) {
-        setPreferredSize(new Dimension(width, height));
-    }
-
-    @Override
-    public void paint(Graphics g) {
-        Graphics2D g2D = (Graphics2D) g;
-        g2D.setPaint(Color.YELLOW);
-        g2D.fillRect(565, 1000, PADDLE_WIDTH, PADDLE_HEIGHT);
+    public Player() {
+        setBounds(PADDLE_X, PADDLE_Y, PADDLE_WIDTH, PADDLE_HEIGHT);
+        setBackground(Color.YELLOW);
+        setOpaque(true);
     }
 }
