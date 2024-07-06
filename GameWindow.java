@@ -2,21 +2,29 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
-public class GameWindow extends JFrame implements KeyListener {
-    private static final int WIDTH = 1280;
-    private static final int HEIGHT = 1024;
-    private static final int VELOCITY = 10;
+public class GameWindow extends JFrame implements KeyListener, Constants {
     private JLabel player;
+    private JLabel[][] map;
 
     public GameWindow(String name) {
         super(name); 
-        setSize(WIDTH, HEIGHT);
+        setSize(SCREEN_WIDTH, SCREEN_HEIGHT);
         setResizable(false);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         getContentPane().setBackground(Color.BLACK);
         addKeyListener(this);
+
         player = new Player();
         add(player);
+
+        map = new JLabel[ROWS][COLUMNS];
+        for (int i = 0; i < ROWS; i++) {
+            for (int j = 0; j < COLUMNS; j++) {
+                map[i][j] = new Brick(i*BRICK_SPACE+BRICK_HEIGHT*(i+3), (j+1)*(BRICK_WIDTH+BRICK_SPACE));
+                add(map[i][j]);
+            }
+        }
+
         setLayout(null);
         setLocationRelativeTo(null);
         setVisible(true);
@@ -41,7 +49,7 @@ public class GameWindow extends JFrame implements KeyListener {
             case 39:
                 player.setLocation(player.getX() + VELOCITY, player.getY());
                 break;
-           
+                
             case 37:
                 player.setLocation(player.getX() - VELOCITY, player.getY());
                 break;   
