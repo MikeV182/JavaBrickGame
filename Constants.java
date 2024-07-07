@@ -19,4 +19,5 @@ public interface Constants {
     int BALL_D = 25;
     int BALL_X = SCREEN_WIDTH / 2 - BALL_D / 2;
     int BALL_Y = PADDLE_Y - BALL_D;
+    int BALL_VELOCITY = 3;
 }
