@@ -5,6 +5,7 @@ import javax.swing.*;
 public class GameWindow extends JFrame implements KeyListener, Constants {
     private JLabel player;
     private JLabel[][] map;
+    private JLabel ball;
 
     public GameWindow(String name) {
         super(name); 
@@ -24,6 +25,9 @@ public class GameWindow extends JFrame implements KeyListener, Constants {
                 add(map[i][j]);
             }
         }
+
+        ball = new Ball();
+        add(ball);
 
         setLayout(null);
         setLocationRelativeTo(null);
