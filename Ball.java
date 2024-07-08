@@ -1,11 +1,12 @@
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 import javax.swing.*;
 
 public class Ball extends JLabel implements ActionListener, Constants {
     Timer timer;
+    private int moveX = BALL_VELOCITY;
+    private int moveY = -BALL_VELOCITY;
 
     public Ball() {
         setBounds(BALL_X, BALL_Y, BALL_D, BALL_D);
@@ -23,7 +24,18 @@ public class Ball extends JLabel implements ActionListener, Constants {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        setLocation(this.getX() + BALL_VELOCITY, this.getY() - BALL_VELOCITY);
+        moveBall();
         repaint();
+    }
+
+    private void moveBall() {
+        setLocation(this.getX() + moveX, this.getY() + moveY);
+        if (this.getX() + BALL_D >= SCREEN_WIDTH || this.getX() <= 0) {
+            moveX = -moveX;
+        }
+        //TODO: remove "|| this.getY() >= SCREEN_HEIGHT" condition in final version - only for testing purposes
+        if (this.getY() <= 0 || this.getY() >= SCREEN_HEIGHT) {
+            moveY = -moveY;
+        }
     }
 }
