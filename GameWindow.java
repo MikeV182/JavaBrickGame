@@ -3,9 +3,9 @@ import java.awt.event.*;
 import javax.swing.*;
 
 public class GameWindow extends JFrame implements KeyListener, Constants {
-    private JLabel player;
-    private JLabel[][] map;
-    private JLabel ball;
+    private static JLabel player;
+    private static JLabel[][] map;
+    private static JLabel ball;
 
     public GameWindow(String name) {
         super(name); 
@@ -34,15 +34,23 @@ public class GameWindow extends JFrame implements KeyListener, Constants {
         setVisible(true);
     }
 
+    public static JLabel getPlayer() {
+        return player;
+    }
+
     @Override
     public void keyTyped(KeyEvent e) {
        switch (e.getKeyChar()) {
         case 'z':
-            player.setLocation(player.getX() - VELOCITY, player.getY());
+            if (player.getX() - VELOCITY >= 0) {
+                player.setLocation(player.getX() - VELOCITY, player.getY()); 
+            }
             break;
        
         case 'x':
-            player.setLocation(player.getX() + VELOCITY, player.getY());
+            if (player.getX() + PADDLE_WIDTH + VELOCITY <= SCREEN_WIDTH) {
+                player.setLocation(player.getX() + VELOCITY, player.getY());
+            }
             break;   
        }
     }
@@ -51,11 +59,15 @@ public class GameWindow extends JFrame implements KeyListener, Constants {
     public void keyPressed(KeyEvent e) {
         switch (e.getKeyCode()) {
             case 39:
-                player.setLocation(player.getX() + VELOCITY, player.getY());
+                if (player.getX() + PADDLE_WIDTH + VELOCITY <= SCREEN_WIDTH) {
+                    player.setLocation(player.getX() + VELOCITY, player.getY());
+                }
                 break;
                 
             case 37:
-                player.setLocation(player.getX() - VELOCITY, player.getY());
+                if (player.getX() - VELOCITY >= 0) {
+                    player.setLocation(player.getX() - VELOCITY, player.getY()); 
+                }
                 break;   
         }
     }

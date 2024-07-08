@@ -34,8 +34,18 @@ public class Ball extends JLabel implements ActionListener, Constants {
             moveX = -moveX;
         }
         //TODO: remove "|| this.getY() >= SCREEN_HEIGHT" condition in final version - only for testing purposes
-        if (this.getY() <= 0 || this.getY() >= SCREEN_HEIGHT) {
+        if (this.getY() <= 0 || this.getY() >= SCREEN_HEIGHT || paddleCollision()) {
             moveY = -moveY;
         }
     }
+
+    private boolean paddleCollision() {
+        if (GameWindow.getPlayer().getX() <= this.getX() && 
+            this.getX() <= GameWindow.getPlayer().getX() + PADDLE_WIDTH && 
+            GameWindow.getPlayer().getY() <= this.getY() + BALL_D) {
+            return true;
+        }
+        return false;
+    }
+
 }
