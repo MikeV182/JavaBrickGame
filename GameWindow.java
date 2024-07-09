@@ -38,6 +38,19 @@ public class GameWindow extends JFrame implements KeyListener, Constants {
         return player;
     }
 
+    public static JLabel getBrickLabel(int row, int column) {
+        return map[row][column];
+    }
+
+    public static Brick getBrick(int row, int column) {
+        return (Brick)map[row][column];
+    }
+    
+    public static void deleteBrick(int row, int column, JFrame frame) {
+        frame.remove(getBrickLabel(row, column));
+        frame.repaint();
+    }
+
     @Override
     public void keyTyped(KeyEvent e) {
        switch (e.getKeyChar()) {
