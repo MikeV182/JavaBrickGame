@@ -20,4 +20,7 @@ public interface Constants {
     int BALL_X = SCREEN_WIDTH / 2 - BALL_D / 2;
     int BALL_Y = PADDLE_Y - BALL_D;
     int BALL_VELOCITY = 4;
+
+    int POINTS_INCREASE = 5;
+    int POINTS_TOTAL = ROWS * COLUMNS * POINTS_INCREASE;
 }

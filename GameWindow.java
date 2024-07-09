@@ -6,6 +6,7 @@ public class GameWindow extends JFrame implements KeyListener, Constants {
     private static JLabel player;
     private static JLabel[][] map;
     private static JLabel ball;
+    private static JLabel currentPoints; 
 
     public GameWindow(String name) {
         super(name); 
@@ -29,9 +30,16 @@ public class GameWindow extends JFrame implements KeyListener, Constants {
         ball = new Ball();
         add(ball);
 
+        currentPoints = new Points();
+        add(currentPoints);
+
         setLayout(null);
         setLocationRelativeTo(null);
         setVisible(true);
+    }
+
+    public static Points getPoints() {
+        return (Points)currentPoints;
     }
 
     public static JLabel getPlayer() {

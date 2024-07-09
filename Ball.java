@@ -31,6 +31,21 @@ public class Ball extends JLabel implements ActionListener, Constants {
     private void moveBall() {
         setLocation(this.getX() + moveX, this.getY() + moveY);
         brickCollision();
+        screenBordersCollision();
+
+        if (gameLose()) {
+            new LoseScreen(Main.gameWindow);
+        }
+        else if (!gameLose() && Points.getPoints() == POINTS_TOTAL) {
+            new WinScreen(Main.gameWindow);
+        }
+    }
+
+    private boolean gameLose() {
+        return (this.getY() + BALL_D >= SCREEN_HEIGHT ? true : false);
+    }
+
+    private void screenBordersCollision() {
         if (this.getX() + BALL_D >= SCREEN_WIDTH || this.getX() <= 0) {
             moveX = -moveX;
         }
@@ -56,6 +71,7 @@ public class Ball extends JLabel implements ActionListener, Constants {
                 if (this.getBounds().intersects(GameWindow.getBrickLabel(i, j).getBounds()) && GameWindow.getBrick(i, j).isAlive()) {
                     moveX = -moveX;
                     moveY = -moveY;
+                    Points.increasePoints(GameWindow.getPoints());
                     GameWindow.deleteBrick(i, j, Main.gameWindow);
                     GameWindow.getBrick(i, j).kill();
                     flag = !flag;
